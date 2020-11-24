@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Camion implements Serializable {
 
-    private int id;
     private double capacidad;
+    private int id;
     private ArrayList<Paquete> paquetes;
 
     public Camion(int id, double capacidad, ArrayList<Paquete> paquetes) {

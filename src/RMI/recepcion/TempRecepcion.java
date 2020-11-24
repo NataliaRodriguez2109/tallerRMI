@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package RMI.georeferenciador;
+package RMI.recepcion;
 
-import RMI.elements.Ciudad;
 import RMI.elements.Globales;
 import RMI.elements.Paquete;
 import java.util.ArrayList;
@@ -14,13 +13,14 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public class BufferGeoreferenciador extends Thread {
+public class TempRecepcion extends Thread {
 
+    private RecepcionImpl recepcionImpl;
     private ArrayList<Paquete> paquetes;
-    private GeoreferenciadorImpl georeferenciadorImpl;
+    
 
-    public BufferGeoreferenciador(GeoreferenciadorImpl georeferenciadorImpl) {
-        this.georeferenciadorImpl = georeferenciadorImpl;
+    public TempRecepcion(RecepcionImpl recepcionImpl) {
+        this.recepcionImpl = recepcionImpl;
         this.paquetes = new ArrayList<>();
     }
 
@@ -28,35 +28,27 @@ public class BufferGeoreferenciador extends Thread {
         this.paquetes.add(paquete);
     }
 
-    private Paquete asignarCiudad(Paquete paquete) {
-        Ciudad ciudad = this.georeferenciadorImpl.obtenerCiudad(paquete.getCiudadReceptor(), paquete.getDepartamentoReceptor());
-        paquete.setUbicacion(ciudad.getUbicacion());
-        return paquete;
-    }
-
-    private void georeferenciar() {
+    private void registrarPaquete() {
         while (true) {
             if (paquetes.size() >= 1) {
                 try {
-                    System.out.println("###########################");
-                    System.out.println("Iniciando georeferenciacion");
+                    System.out.println("Registrando paquete");
 
                     long inicio = System.currentTimeMillis();
-                    Thread.sleep(Globales.TIEMPO_REFERENCIADOR);
+                    Thread.sleep(Globales.TIEMPOREGISTRO);
                     Paquete paquete = paquetes.get(0);
-                    paquete = this.asignarCiudad(paquete);
 
                     long fin = System.currentTimeMillis();
                     double tiempo = (double) ((fin - inicio) / 1000);
                     System.out.println("fin: " + tiempo + " segundos");
 
                     this.paquetes.remove(paquete);
-
-                    this.georeferenciadorImpl.encolarPaquete(paquete);
+                    
+                    this.recepcionImpl.guardarPaqueteBodega(paquete);
                 } catch (InterruptedException ex) {
-                    System.out.println("[Servidor] (InterruptedException) " + ex.getMessage());
+                    System.out.println("[Server] (InterruptedException)");
                 }
-            } else {
+            }else{
                 System.getProperties();
             }
         }
@@ -64,6 +56,6 @@ public class BufferGeoreferenciador extends Thread {
 
     @Override
     public void run() {
-        georeferenciar();
+        registrarPaquete();
     }
 }

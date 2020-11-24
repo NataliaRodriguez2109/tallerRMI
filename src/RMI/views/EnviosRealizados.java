@@ -20,13 +20,11 @@ public class EnviosRealizados extends javax.swing.JDialog {
 
     ImageIcon logo = new ImageIcon("src/RMI/images/camion1.png");
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
-    private BodegaClient clienteBodega;
-    private DefaultTableModel model;
+    private BodegaClient BodegaClient;
     private ArrayList<Camion> camiones;
+    private DefaultTableModel model;
 
-    /**
-     * Creates new form EnviosRealizados
-     */
+    
     public EnviosRealizados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -35,9 +33,9 @@ public class EnviosRealizados extends javax.swing.JDialog {
         labelFondo.setIcon(fondo);
     }
 
-    public void setClienteBodega(BodegaClient clienteBodega) {
-        this.clienteBodega = clienteBodega;
-        this.camiones = this.clienteBodega.Camiones();
+    public void setBodegaClient(BodegaClient BodegaClient) {
+        this.BodegaClient = BodegaClient;
+        this.camiones = this.BodegaClient.Camiones();
         this.generateForms();
     }
 
@@ -79,11 +77,11 @@ public class EnviosRealizados extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Camion id", "Fecha envio", "Emisor", "Receptor", "Ciudad emisor", "Ciudad Receptor", "Capacidad camion", "Peso", "Estado"
+                "Camion id", "Capacidad camion", "Receptor", "Ciudad Receptor", "Emisor", "Ciudad emisor", "Fecha envio", "Estado", "Peso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -98,11 +96,21 @@ public class EnviosRealizados extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 69, 850, 338));
 
         jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton1.setText("SALIR");
+        jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

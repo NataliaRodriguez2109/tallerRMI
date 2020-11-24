@@ -33,26 +33,27 @@ public class GeorefereciadorClient {
             Registry registry = LocateRegistry.getRegistry(ip, 1099);
             this.georeferenciador = (Georeferenciador) registry.lookup("Georeferenciador");
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Georeferenciador] (RemoteException): " + ex.getMessage());
         } catch (NotBoundException ex) {
-            System.out.println("[Cliente] (NotBoundException): " + ex.getMessage());
+            System.out.println("[Client Georeferenciador] (NotBoundException): " + ex.getMessage());
         }
     }
 
-    public ArrayList<Departamento> obtenerDepartamentos() {
-        try {
-            return georeferenciador.obtenerDepartamentos();
-        } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
-        }
-        return null;
-    }
 
     public ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) {
         try {
             return georeferenciador.obtenerCiudades(nombreDepartamento);
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Georeferenciador] (RemoteException): " + ex.getMessage());
+        }
+        return null;
+    }
+    
+    public ArrayList<Departamento> obtenerDepartamentos() {
+        try {
+            return georeferenciador.obtenerDepartamentos();
+        } catch (RemoteException ex) {
+            System.out.println("[Client Georeferenciador] (RemoteException): " + ex.getMessage());
         }
         return null;
     }
@@ -61,7 +62,7 @@ public class GeorefereciadorClient {
         try {
             return georeferenciador.georeferenciarPaquete(Recepcion, paquete);
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Georeferenciador] (RemoteException): " + ex.getMessage());
         }
         return false;
     }

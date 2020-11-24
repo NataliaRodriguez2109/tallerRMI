@@ -20,42 +20,40 @@ import java.util.ArrayList;
  */
 public class RecepcionImpl implements Recepcion{
 
-    private GeorefereciadorClient clienteGeorefereciador;
-    private BodegaClient clienteBodega;
-    private BufferRecepcion bufferRecepcion;
+    private GeorefereciadorClient GeorefereciadorClient;
+    private BodegaClient BodegaClient;
+    private TempRecepcion bufferRecepcion;
     
     public RecepcionImpl(String ip) {
         super();
-        this.clienteGeorefereciador = new GeorefereciadorClient(ip);
-        this.clienteBodega = new BodegaClient(ip);
-        this.bufferRecepcion = new BufferRecepcion(this);
+        this.GeorefereciadorClient = new GeorefereciadorClient(ip);
+        this.BodegaClient = new BodegaClient(ip);
+        this.bufferRecepcion = new TempRecepcion(this);
         this.bufferRecepcion.start();
     }
-
-    @Override
-    public ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) throws RemoteException {
-        return this.clienteGeorefereciador.obtenerCiudades(nombreDepartamento);
-    }
-
-    @Override
-    public ArrayList<Departamento> obtenerDepartamentos() throws RemoteException {
-        return this.clienteGeorefereciador.obtenerDepartamentos();
-    }
-
+    
     @Override
     public boolean registrarPaquete(Paquete paquete) throws RemoteException {
         this.bufferRecepcion.agregarPaquete(paquete);
         return true;
     }
-    
     @Override
-    public boolean georeferenciarPaquete(Paquete paquete){
-        return this.clienteGeorefereciador.georeferenciarPaquete(this, paquete);
+    public ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) throws RemoteException {
+        return this.GeorefereciadorClient.obtenerCiudades(nombreDepartamento);
     }
     
-    public boolean almacenarPaquete(Paquete paquete){
-        //AQUI DEBO ENVIAR A LA BODEGA EL PAQUETE
-        this.clienteBodega.almacenarPaquete(paquete);
+    @Override
+    public ArrayList<Departamento> obtenerDepartamentos() throws RemoteException {
+        return this.GeorefereciadorClient.obtenerDepartamentos();
+    }
+
+    @Override
+    public boolean georeferenciarPaquete(Paquete paquete){
+        return this.GeorefereciadorClient.georeferenciarPaquete(this, paquete);
+    }
+    
+    public boolean guardarPaqueteBodega(Paquete paquete){
+        this.BodegaClient.guardarPaquete(paquete);
         return true;
     }
     

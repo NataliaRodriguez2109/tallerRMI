@@ -20,7 +20,7 @@ public class Paquete implements Serializable, Comparable<Paquete> {
     private String nombreReceptor;
     private String departamentoReceptor;
     private String ciudadReceptor;
-    private Ubicacion ubicacion;
+    private Coordenadas coordenadas;
     private String fechaRecibido;
     private String fechaEnvio;
     private String estado;
@@ -117,12 +117,12 @@ public class Paquete implements Serializable, Comparable<Paquete> {
         this.peso = peso;
     }
 
-    public Ubicacion getUbicacion() {
-        return ubicacion;
+    public Coordenadas getCoordenadas() {
+        return coordenadas;
     }
 
-    public void setUbicacion(Ubicacion ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setCoordenadas(Coordenadas coordenadas) {
+        this.coordenadas = coordenadas;
     }
 
     public double getDistanciaDestino() {

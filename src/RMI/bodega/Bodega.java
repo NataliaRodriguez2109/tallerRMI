@@ -7,7 +7,7 @@ package RMI.bodega;
 
 import RMI.elements.Camion;
 import RMI.elements.Paquete;
-import RMI.elements.Ubicacion;
+import RMI.elements.Coordenadas;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * @author nata_
  */
 public interface Bodega extends Remote{
-    boolean almacenarPaquete(Paquete paquete) throws RemoteException;
-    ArrayList<Paquete> obtenerPaquetesBodega() throws RemoteException;
+    boolean guardarPaquete(Paquete paquete) throws RemoteException;
+    ArrayList<Paquete> obtenerPBodega() throws RemoteException;
     ArrayList<Camion> Camiones() throws RemoteException;
-    boolean solicitarEnvio(Ubicacion ubicacion, double peso) throws RemoteException;
+    boolean solicitarEnvio(Coordenadas ubicacion, double peso) throws RemoteException;
 }

@@ -7,7 +7,7 @@ package RMI.georeferenciador;
 
 import RMI.elements.Ciudad;
 import RMI.elements.Departamento;
-import RMI.elements.Ubicacion;
+import RMI.elements.Coordenadas;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,21 +21,16 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public class UbicacionBD {
+public class DB {
 
     private static Connection connection;
     private static Statement statement;
 
-    /**
-     * Es la coneccion a la base de datos
-     *
-     * @return
-     */
     public static Connection connect() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException ex) {
-            System.err.println("ClassNotFoundException | InstantiationException | IllegalAccessException " + ex.getMessage());
+            System.err.println("Error: " + ex.getMessage());
             System.exit(1);
         }
 
@@ -44,10 +39,10 @@ public class UbicacionBD {
 
             statement = connection.createStatement();
 
-            statement.setQueryTimeout(30); // segundos
+            statement.setQueryTimeout(30);
             return connection;
         } catch (SQLException e) {
-            System.err.println("[Servidor] (SQLException) " + e.getMessage());
+            System.err.println("[Server] (SQLException) " + e.getMessage());
             return connection;
         }
     }
@@ -56,10 +51,9 @@ public class UbicacionBD {
         nombreDepartamento = nombreDepartamento.trim();
         ArrayList<Ciudad> ciudades = new ArrayList<>();
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM ciudades WHERE departamento = '" + nombreDepartamento + "'");
-        System.out.println("aquiiii");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Ciudad city = new Ciudad(rs.getString("ciudad"), rs.getString("departamento"), new Ubicacion(rs.getDouble("latitud"), rs.getDouble("longitud")), rs.getInt("codigo"));
+            Ciudad city = new Ciudad(rs.getString("ciudad"), rs.getString("departamento"), new Coordenadas(rs.getDouble("latitud"), rs.getDouble("longitud")), rs.getInt("codigo"));
             boolean bandera = false;
             for (int i = 0; i < ciudades.size(); i++) {
                 if (ciudades.get(i).getNombre().equals(city.getNombre())) {
@@ -92,7 +86,7 @@ public class UbicacionBD {
         String sql1 = "SELECT * FROM ciudades WHERE ciudad = '" + nombreCiudad + "' and departamento = '" + nombreDepartamento + "'";
         ResultSet rs = statement.executeQuery(sql1);
         while (rs.next()) {
-            return new Ciudad(rs.getString("ciudad"), rs.getString("departamento"), new Ubicacion(rs.getDouble("latitud"), rs.getDouble("longitud")), rs.getInt("codigo"));
+            return new Ciudad(rs.getString("ciudad"), rs.getString("departamento"), new Coordenadas(rs.getDouble("latitud"), rs.getDouble("longitud")), rs.getInt("codigo"));
         }
         return null;
     }
@@ -101,7 +95,6 @@ public class UbicacionBD {
         ciudad = ciudad.trim();
         ArrayList<String> latiLong = new ArrayList<>();
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM ciudades WHERE ciudad = '" + ciudad + "'");
-        System.out.println("aquiiii");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {            
             latiLong.add(rs.getDouble("latitud")+", "+rs.getDouble("longitud"));            

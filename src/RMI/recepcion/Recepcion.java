@@ -17,9 +17,9 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public interface Recepcion extends Remote {
-    ArrayList<Departamento> obtenerDepartamentos() throws RemoteException;
-    ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) throws RemoteException;
+public interface Recepcion extends Remote {    
     boolean registrarPaquete(Paquete paquete) throws RemoteException;
+    ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) throws RemoteException;
+    ArrayList<Departamento> obtenerDepartamentos() throws RemoteException;
     boolean georeferenciarPaquete(Paquete paquete) throws RemoteException;    
 }

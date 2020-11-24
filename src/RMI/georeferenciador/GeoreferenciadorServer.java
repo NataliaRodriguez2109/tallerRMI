@@ -24,32 +24,32 @@ public class GeoreferenciadorServer {
     }
 
     public void iniciarServicios() {
-        System.out.println("[Servidor] Establecer a través de cual interfaz de red del servidor ser recibirán peticiones.");
+        System.out.println("[Server Georeferenciador] Establecer a través de cual interfaz de red del servidor ser recibirán peticiones.");
         System.setProperty("java.rmi.server.hostname", this.ip);
         
-        System.out.println("[Servidor] Especificando el nombre de la politica de seguridad.");
+        System.out.println("[Server Georeferenciador] Especificando el nombre de la politica de seguridad.");
         System.setProperty("java.security.policy", "server.policy");
         
-        System.out.println("[Servidor] Estableciendo el manejador de seguridad.");
+        System.out.println("[Server Georeferenciador] Estableciendo el manejador de seguridad.");
         if (System.getSecurityManager() == null)
             System.setSecurityManager(new SecurityManager());
         
         try{
-            System.out.println("[Servidor] Instanciado el objeto que va a ser accedido remotamente.");
+            System.out.println("[Server Georeferenciador] Instanciado el objeto que va a ser accedido remotamente.");
             Georeferenciador georeferenciador = new GeoreferenciadorImpl();
             
-            System.out.println("[Servidor] Creando el 'stub' del objeto que va a ser accedido remotamente.");
+            System.out.println("[Server Georeferenciador] Creando el 'stub' del objeto que va a ser accedido remotamente.");
             Georeferenciador stub = (Georeferenciador) UnicastRemoteObject.exportObject(georeferenciador,0);
             
-            System.out.println("[Servidor] Iniciando su propio servicio de RMI Registry.");
+            System.out.println("[Server Georeferenciador] Iniciando su propio servicio de RMI Registry.");
             Registry registry = LocateRegistry.createRegistry(1099);
             
-            System.out.println("[Servidor] Publicando el stub del objeto remoto en el RMI Registry.");
+            System.out.println("[Server Georeferenciador] Publicando el stub del objeto remoto en el RMI Registry.");
             registry.rebind("Georeferenciador", stub);
             
-            System.out.println("[Servidor] Servidor listo georeferenciador!");
+            System.out.println("[Server Georeferenciador] Servidor del georeferenciador listo!");
         }catch(RemoteException e) {
-            System.out.println("[Servidor] (RemoteException): " + e.getMessage());
+            System.out.println("[Server Georeferenciador] (RemoteException): " + e.getMessage());
         }
     }
 

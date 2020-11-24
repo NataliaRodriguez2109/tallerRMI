@@ -32,17 +32,26 @@ public class RecepcionClient {
             Registry registry = LocateRegistry.getRegistry(ip, 1710);
             this.recepcion = (Recepcion) registry.lookup("Recepcion");
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
         } catch (NotBoundException ex) {
-            System.out.println("[Cliente] (NotBoundException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (NotBoundException): " + ex.getMessage());
         }
     }
+    
+    public boolean registrarPaquete(Paquete paquete){
+        try {
+            return recepcion.georeferenciarPaquete(paquete);
+        } catch (RemoteException ex) {
+            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
+        }
+        return false;
+    }  
 
     public ArrayList<Departamento> obtenerDepartamentos() {
         try {            
             return recepcion.obtenerDepartamentos();
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
         }
         return null;
     }
@@ -51,18 +60,9 @@ public class RecepcionClient {
         try {
             return recepcion.obtenerCiudades(nombreDepartamento);
         } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
         }
         return null;
-    }
-    
-    public boolean registrarPaquete(Paquete paquete){
-        try {
-            return recepcion.georeferenciarPaquete(paquete);
-        } catch (RemoteException ex) {
-            System.out.println("[Cliente] (RemoteException): " + ex.getMessage());
-        }
-        return false;
-    }      
+    }    
 
 }

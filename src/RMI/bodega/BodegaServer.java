@@ -24,37 +24,37 @@ public class BodegaServer {
     }
 
     public void iniciarServicios() {
-        System.out.println("[Servidor] Establecer a través de cual interfaz de red del servidor ser recibirán peticiones.");
+        System.out.println("[Server Bodega] Establecer a través de cual interfaz de red del servidor se recibirán peticiones.");
         System.setProperty("java.rmi.server.hostname", this.ip);
         
-        System.out.println("[Servidor] Especificando el nombre de la politica de seguridad.");
+        System.out.println("[Server Bodega] Especificando el nombre de la politica de seguridad.");
         System.setProperty("java.security.policy", "server.policy");
         
-        System.out.println("[Servidor] Estableciendo el manejador de seguridad.");
+        System.out.println("[Server Bodega] Estableciendo el manejador de seguridad.");
         if (System.getSecurityManager() == null)
             System.setSecurityManager(new SecurityManager());
         
         try{
-            System.out.println("[Servidor] Instanciado el objeto que va a ser accedido remotamente.");
+            System.out.println("[Server Bodega] Instanciado el objeto que va a ser accedido remotamente.");
             Bodega bodega = new BodegaImpl();
             
-            System.out.println("[Servidor] Creando el 'stub' del objeto que va a ser accedido remotamente.");
+            System.out.println("[Server Bodega] Creando el 'stub' del objeto que va a ser accedido remotamente.");
             Bodega stub = (Bodega) UnicastRemoteObject.exportObject(bodega,0);
             
-            System.out.println("[Servidor] Iniciando su propio servicio de RMI Registry.");
+            System.out.println("[Server Bodega] Iniciando su propio servicio de RMI Registry.");
             Registry registry = LocateRegistry.createRegistry(1525);
             
-            System.out.println("[Servidor] Publicando el stub del objeto remoto en el RMI Registry.");
+            System.out.println("[Server Bodega] Publicando el stub del objeto remoto en el RMI Registry.");
             registry.rebind("Bodega", stub);
             
-            System.out.println("[Servidor] Servidor listo bodega!");
+            System.out.println("[Server Bodega] Servidor de bodega listo!");
         }catch(RemoteException e) {
-            System.out.println("[Servidor] (RemoteException): " + e.getMessage());
+            System.out.println("[Server Bodega] (RemoteException): " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        BodegaServer bodegaServidor = new BodegaServer("127.0.0.1");
-        bodegaServidor.iniciarServicios();
+        BodegaServer bodegaServer = new BodegaServer("127.0.0.1");
+        bodegaServer.iniciarServicios();
     }
 }

@@ -8,7 +8,7 @@ package RMI.bodega;
 import RMI.elements.Camion;
 import RMI.elements.Globales;
 import RMI.elements.Paquete;
-import RMI.elements.Ubicacion;
+import RMI.elements.Coordenadas;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -18,49 +18,53 @@ import java.util.ArrayList;
  */
 public class BodegaImpl implements Bodega {
 
-    private ArrayList<Paquete> paquetesEnBodega;
+    private ArrayList<Paquete> paquetesBodega;
+    
+    private TempBodega bufferBodega;
+    
     private ArrayList<Camion> camiones;
-    private BufferBodega bufferBodega;
 
     public BodegaImpl() {
-        this.paquetesEnBodega = new ArrayList<>();
+        this.paquetesBodega = new ArrayList<>();
         this.camiones = new ArrayList<>();
-        this.bufferBodega = new BufferBodega(this);
+        this.bufferBodega = new TempBodega(this);
         this.bufferBodega.start();
     }
 
     @Override
-    public boolean almacenarPaquete(Paquete paquete) throws RemoteException {
-        this.bufferBodega.agregarPaquete(paquete);
+    public boolean guardarPaquete(Paquete paquete) throws RemoteException {
+        this.bufferBodega.añadirPaquete(paquete);
         return true;
     }
 
-    public boolean almacenarEnBodega(Paquete paquete) {
-        paquete.setEstado(Globales.ALMACENADO);
-        this.paquetesEnBodega.add(paquete);
+    public boolean guardarEnBodega(Paquete paquete) {
+        paquete.setEstado(Globales.ESTADO_ALMACENADO);
+        this.paquetesBodega.add(paquete);
+        return true;
+    }
+    
+    @Override
+    public boolean solicitarEnvio(Coordenadas ubicacion, double peso) throws RemoteException {
+        this.bufferBodega.agregarPaquetesEnviar(this.paquetesBodega, ubicacion, peso);
+        return true;
+    }
+    
+    public boolean enviarPaquetes(ArrayList<Paquete> paquetesEnviar, ArrayList<Paquete> paquetesBodega, double capacidad){
+        this.paquetesBodega = paquetesBodega;
+        camiones.add(new Camion(camiones.size()+1, capacidad, paquetesEnviar));
         return true;
     }
 
     @Override
-    public ArrayList<Paquete> obtenerPaquetesBodega() throws RemoteException {
+    public ArrayList<Paquete> obtenerPBodega() throws RemoteException {
         ArrayList<Paquete> paquetes = new ArrayList<>();
-        for(Paquete paquete : this.paquetesEnBodega){
+        for(Paquete paquete : this.paquetesBodega){
             paquetes.add(paquete);
         }
         return paquetes;
     }
 
-    @Override
-    public boolean solicitarEnvio(Ubicacion ubicacion, double peso) throws RemoteException {
-        this.bufferBodega.agregarPaquetesEnviar(this.paquetesEnBodega, ubicacion, peso);
-        return true;
-    }
     
-    public boolean enviarPaquetes(ArrayList<Paquete> paquetesEnviar, ArrayList<Paquete> paquetesEnBodega, double capacidad){
-        this.paquetesEnBodega = paquetesEnBodega;
-        camiones.add(new Camion(camiones.size()+1, capacidad, paquetesEnviar));
-        return true;
-    }
 
     @Override
     public ArrayList<Camion> Camiones() throws RemoteException {

@@ -20,16 +20,31 @@ import java.util.ArrayList;
  */
 public class GeoreferenciadorImpl implements Georeferenciador {
 
-    private BufferGeoreferenciador bufferGeoreferenciador;
+    private TempGeoreferenciador tempGeoreferenciador;
     private Recepcion recepcion;    
-    private UbicacionBD udb;
+    private DB udb;
     
     public GeoreferenciadorImpl() {
         super();
-        udb = new UbicacionBD();
+        udb = new DB();
         udb.connect();
-        this.bufferGeoreferenciador = new BufferGeoreferenciador(this);
-        this.bufferGeoreferenciador.start();
+        this.tempGeoreferenciador = new TempGeoreferenciador(this);
+        this.tempGeoreferenciador.start();
+    }
+     @Override
+    public boolean georeferenciarPaquete(Recepcion recepcion, Paquete paquete) throws RemoteException {
+        this.recepcion = recepcion;
+        this.tempGeoreferenciador.guardarPaquete(paquete);
+        return true;
+    }
+
+    public Ciudad obtenerCiudad(String nombreCiudad, String nombreDepartamento) {
+        try {
+            return udb.obtenerCiudad(nombreCiudad, nombreDepartamento);
+        } catch (SQLException ex) {
+            System.out.println("[Server Georeferenciador] (SQLException)");
+        }
+        return null;
     }
 
     @Override
@@ -37,7 +52,7 @@ public class GeoreferenciadorImpl implements Georeferenciador {
         try {
             return udb.obtenerCiudades(nombreDepartamento);
         } catch (SQLException ex) {
-            System.out.println("[Servidor] (SQLException1)");
+            System.out.println("[Server Georeferenciador] (SQLException1)");
         }
         return null;
     }
@@ -47,32 +62,18 @@ public class GeoreferenciadorImpl implements Georeferenciador {
         try {
             return udb.obtenerDepartamentos();
         } catch (SQLException ex) {
-            System.out.println("[Servidor] (SQLException2)");
+            System.out.println("[Server Georeferenciador] (SQLException2)");
         }
         return null;
     }
 
-    @Override
-    public boolean georeferenciarPaquete(Recepcion recepcion, Paquete paquete) throws RemoteException {
-        this.recepcion = recepcion;
-        this.bufferGeoreferenciador.agregarPaquete(paquete);
-        return true;
-    }
+   
 
-    public Ciudad obtenerCiudad(String nombreCiudad, String nombreDepartamento) {
-        try {
-            return udb.obtenerCiudad(nombreCiudad, nombreDepartamento);
-        } catch (SQLException ex) {
-            System.out.println("[Servidor] (SQLException)");
-        }
-        return null;
-    }
-
-    public boolean encolarPaquete(Paquete paquete){
+    public boolean agregarPaqueteACola(Paquete paquete){
         try {
             this.recepcion.registrarPaquete(paquete);
         } catch (RemoteException ex) {
-            System.out.println("[Servidor] (RemoteException)");
+            System.out.println("[Server Georeferenciador] (RemoteException)");
         }
         return true;
     }

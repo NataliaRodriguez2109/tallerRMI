@@ -19,14 +19,11 @@ import javax.swing.JOptionPane;
  */
 public class RegistroEnvio extends javax.swing.JDialog {
 
-    private RecepcionClient clienteRecepcion;
+    private RecepcionClient RecepcionClient;
     ImageIcon logo = new ImageIcon("src/RMI/images/camion1.png");
     
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
 
-    /**
-     * Creates new form JRegister
-     */
     public RegistroEnvio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -35,18 +32,18 @@ public class RegistroEnvio extends javax.swing.JDialog {
         labelFondo.setIcon(fondo);
     }
 
-    public void setClienteRecepcion(RecepcionClient clienteRecepcion) {
-        this.clienteRecepcion = clienteRecepcion;
+    public void setRecepcionClient(RecepcionClient clienteRecepcion) {
+        this.RecepcionClient = clienteRecepcion;
 
-        for (Departamento departamento : this.clienteRecepcion.obtenerDepartamentos()) {
-            jComboBox1.addItem(departamento.getNombre());
-            jComboBox3.addItem(departamento.getNombre());
+        for (Departamento departamento : this.RecepcionClient.obtenerDepartamentos()) {
+            CBDepEmisor.addItem(departamento.getNombre());
+            CBDepReceptor.addItem(departamento.getNombre());
         }
-        for (Ciudad ciudad : this.clienteRecepcion.obtenerCiudades((String) jComboBox1.getSelectedItem())) {
-            jComboBox2.addItem(ciudad.getNombre() +"("+ciudad.getUbicacion().getLatitud()+", "+ciudad.getUbicacion().getLongitud()+")");
+        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
+            CBCiuEmisor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
         }
-        for (Ciudad ciudad : this.clienteRecepcion.obtenerCiudades((String) jComboBox3.getSelectedItem())) {
-            jComboBox4.addItem(ciudad.getNombre() +"("+ciudad.getUbicacion().getLatitud()+", "+ciudad.getUbicacion().getLongitud()+")");
+        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
+            CBCiuReceptor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
         }
        
     }
@@ -60,34 +57,34 @@ public class RegistroEnvio extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        CBDepEmisor = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEmisor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        CBCiuEmisor = new javax.swing.JComboBox<String>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtReceptor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<String>();
+        CBDepReceptor = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<String>();
-        jTextField3 = new javax.swing.JTextField();
+        CBCiuReceptor = new javax.swing.JComboBox<String>();
+        txtPesoPaq = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         labelLogo = new javax.swing.JLabel();
         labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CBDepEmisor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CBDepEmisorActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, 34));
+        getContentPane().add(CBDepEmisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, 40));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,141 +95,149 @@ public class RegistroEnvio extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre emisor:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 248, 34));
+        getContentPane().add(txtEmisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 248, 40));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ciudad emisor:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 185, 23));
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        CBCiuEmisor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                CBCiuEmisorActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 274, 310, 40));
+        getContentPane().add(CBCiuEmisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 310, 40));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre receptor:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, -1, 20));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 248, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, 20));
+        getContentPane().add(txtReceptor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 248, 40));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Departamento receptor:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 190, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 190, 20));
 
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        CBDepReceptor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                CBDepReceptorActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 248, 30));
+        getContentPane().add(CBDepReceptor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 248, 40));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Ciudad receptor:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 140, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 140, 20));
 
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        CBCiuReceptor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                CBCiuReceptorActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 330, 40));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 206, 34));
+        getContentPane().add(CBCiuReceptor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 330, 40));
+        getContentPane().add(txtPesoPaq, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 206, 34));
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Peso paquete:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton1.setText("Registrar Paquete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        btnRegistrar.setText("Registrar Paquete");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 200, 44));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 200, 40));
 
-        jButton4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton4.setText("Cerrar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, -1, -1));
-        getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 190, 70));
-        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 530));
+        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 200, 40));
+        getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 190, 70));
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        jComboBox2.removeAllItems();
-        for (Ciudad ciudad : this.clienteRecepcion.obtenerCiudades((String) jComboBox1.getSelectedItem())) {
-            jComboBox2.addItem(ciudad.getNombre() +"("+ciudad.getUbicacion().getLatitud()+", "+ciudad.getUbicacion().getLongitud()+")");
+    private void CBDepEmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepEmisorActionPerformed
+        CBCiuEmisor.removeAllItems();
+        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
+            CBCiuEmisor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_CBDepEmisorActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        jComboBox4.removeAllItems();
-        for (Ciudad ciudad : this.clienteRecepcion.obtenerCiudades((String) jComboBox3.getSelectedItem())) {
-            jComboBox4.addItem(ciudad.getNombre() +"("+ciudad.getUbicacion().getLatitud()+", "+ciudad.getUbicacion().getLongitud()+")");
+    private void CBDepReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepReceptorActionPerformed
+        CBCiuReceptor.removeAllItems();
+        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
+            CBCiuReceptor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
         }
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_CBDepReceptorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombreEmisor = jTextField1.getText();
-        String departamentoEmisor = jComboBox1.getSelectedItem().toString();
-        String ciudadEmisor = jComboBox2.getSelectedItem().toString();
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        String nombreEmisor = txtEmisor.getText();
+        String departamentoEmisor = CBDepEmisor.getSelectedItem().toString();
+        String ciudadEmisor = CBCiuEmisor.getSelectedItem().toString();
 
-        String nombreReceptor = jTextField2.getText();
-        String departamentoReceptor = jComboBox3.getSelectedItem().toString();
-        String ciudadReceptor = jComboBox4.getSelectedItem().toString();
+        String nombreReceptor = txtReceptor.getText();
+        String departamentoReceptor = CBDepReceptor.getSelectedItem().toString();
+        String ciudadReceptor = CBCiuReceptor.getSelectedItem().toString();
+        
+        JOptionPane.showMessageDialog(null, nombreEmisor);
+        JOptionPane.showMessageDialog(null, departamentoEmisor);
+        JOptionPane.showMessageDialog(null, ciudadEmisor);
+        JOptionPane.showMessageDialog(null, nombreReceptor);
+        JOptionPane.showMessageDialog(null, departamentoReceptor);
+        JOptionPane.showMessageDialog(null, ciudadReceptor);
+        
         float pesoPaquete = 0;
 
         if (nombreEmisor.equals("") || departamentoEmisor.equals("") || ciudadEmisor.equals("")
                 || nombreReceptor.equals("") || departamentoReceptor.equals("") || ciudadReceptor.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay Campos vacios");
+            JOptionPane.showMessageDialog(null, "No deben haber campos vácios");
             return;
         }
 
         try {
-            pesoPaquete = Float.parseFloat(jTextField3.getText());
+            pesoPaquete = Float.parseFloat(txtPesoPaq.getText());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "El campo peso no es numerico");
+            JOptionPane.showMessageDialog(null, "El valor ingresado para peso no es válido, debe ser numérico");
             return;
         }
 
         Paquete paquete = new Paquete(nombreEmisor, departamentoEmisor, ciudadEmisor, nombreReceptor, departamentoReceptor, ciudadReceptor, pesoPaquete);
-        this.clienteRecepcion.registrarPaquete(paquete);
+        this.RecepcionClient.registrarPaquete(paquete);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void CBCiuReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCiuReceptorActionPerformed
        
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_CBCiuReceptorActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void CBCiuEmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCiuEmisorActionPerformed
         
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_CBCiuEmisorActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> CBCiuEmisor;
+    private javax.swing.JComboBox<String> CBCiuReceptor;
+    private javax.swing.JComboBox<String> CBDepEmisor;
+    private javax.swing.JComboBox<String> CBDepReceptor;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,10 +245,10 @@ public class RegistroEnvio extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel labelFondo;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JTextField txtEmisor;
+    private javax.swing.JTextField txtPesoPaq;
+    private javax.swing.JTextField txtReceptor;
     // End of variables declaration//GEN-END:variables
 }

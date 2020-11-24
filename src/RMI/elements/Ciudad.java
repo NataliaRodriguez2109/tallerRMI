@@ -16,13 +16,13 @@ public class Ciudad implements Serializable {
 
     private String nombre;
     private String departamento;
-    private Ubicacion ubicacion;
+    private Coordenadas coordenadas;
     private int codigo;
 
-    public Ciudad(String nombre, String departamento, Ubicacion ubicacion, int codigo) {
+    public Ciudad(String nombre, String departamento, Coordenadas coordenadas, int codigo) {
         this.nombre = nombre;
         this.departamento = departamento;
-        this.ubicacion = ubicacion;
+        this.coordenadas = coordenadas;
         this.codigo = codigo;
     }
 
@@ -50,12 +50,12 @@ public class Ciudad implements Serializable {
         this.codigo = codigo;
     }
 
-    public Ubicacion getUbicacion() {
-        return ubicacion;
+    public Coordenadas getCoordenadas() {
+        return coordenadas;
     }
 
-    public void setUbicacion(Ubicacion ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setCoordenadas(Coordenadas coordenadas) {
+        this.coordenadas = coordenadas;
     }
 
 }

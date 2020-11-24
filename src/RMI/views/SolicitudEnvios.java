@@ -9,7 +9,7 @@ import RMI.bodega.BodegaClient;
 import RMI.elements.Ciudad;
 import RMI.elements.Departamento;
 import RMI.elements.Paquete;
-import RMI.elements.Ubicacion;
+import RMI.elements.Coordenadas;
 import RMI.recepcion.RecepcionClient;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -24,8 +24,8 @@ public class SolicitudEnvios extends javax.swing.JDialog {
 
     ImageIcon logo = new ImageIcon("src/RMI/images/camion1.png");
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
-    private BodegaClient clienteBodega;
-    private RecepcionClient clienteRecepcion;
+    private BodegaClient BodegaClient;
+    private RecepcionClient RecepcionClient;
     private ArrayList<Paquete> paquetes;
     private DefaultTableModel model;
     private ArrayList<Ciudad> ciudades;
@@ -41,22 +41,22 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         labelFondo.setIcon(fondo);
     }
 
-    public void setClienteBodega(BodegaClient clienteBodega) {
-        this.clienteBodega = clienteBodega;
-        this.paquetes = this.clienteBodega.obtenerPaquetesBodega();
+    public void setBodegaClient(BodegaClient clienteBodega) {
+        this.BodegaClient = clienteBodega;
+        this.paquetes = this.BodegaClient.obtenerPBodega();
         this.generateForms();
     }
 
-    public void setClienteRecepcion(RecepcionClient clienteRecepcion) {
-        this.clienteRecepcion = clienteRecepcion;
+    public void setRecepcionClient(RecepcionClient clienteRecepcion) {
+        this.RecepcionClient = clienteRecepcion;
 
-        for (Departamento departamento : this.clienteRecepcion.obtenerDepartamentos()) {
-            jComboBox1.addItem(departamento.getNombre());
+        for (Departamento departamento : this.RecepcionClient.obtenerDepartamentos()) {
+            CBDepartamento.addItem(departamento.getNombre());
         }
     }
 
     private void generateForms() {
-        this.model = (DefaultTableModel) jTable1.getModel();
+        this.model = (DefaultTableModel) tableSolicitud.getModel();
         if (this.paquetes != null) {
             for (Paquete paquete : this.paquetes) {
                 model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getNombreReceptor(), paquete.getCiudadEmisor(), paquete.getCiudadReceptor(), paquete.getPeso(), paquete.getEstado()});
@@ -74,29 +74,29 @@ public class SolicitudEnvios extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tableSolicitud = new javax.swing.JTable();
+        btnSolicitar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        CBDepartamento = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<String>();
+        CBCiudad = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtCapacidadC = new javax.swing.JTextField();
+        btnCerrar = new javax.swing.JButton();
         labelLogo = new javax.swing.JLabel();
         labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSolicitud.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        tableSolicitud.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Emisor", "Receptor", "Ciudad Origen", "Ciudad Destino", "Peso", "Estado"
+                "Emisor", "Ciudad Emision", "Receptor", "Ciudad Destino", "Estado", "Peso"
             }
         ) {
             Class[] types = new Class [] {
@@ -114,117 +114,117 @@ public class SolicitudEnvios extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableSolicitud);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 712, 282));
 
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton1.setText("Solicitar Envío");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSolicitar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        btnSolicitar.setText("Solicitar Envío");
+        btnSolicitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSolicitarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 221, 40));
+        getContentPane().add(btnSolicitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 570, 221, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SOLICITUD DE ENVÍO DE PAQUETES");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CBDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CBDepartamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 169, 31));
+        getContentPane().add(CBDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 169, 31));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Departamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
 
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 172, 31));
+        getContentPane().add(CBCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 172, 31));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ciudad:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Capacidad camion:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, 170, 31));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
+        getContentPane().add(txtCapacidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 31));
 
-        jButton4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton4.setText("Cerrar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, 230, 40));
+        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, 230, 40));
         getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, 70));
-        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 570));
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String ciudad = jComboBox2.getSelectedItem().toString();
+    private void btnSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarActionPerformed
+        String ciudad = CBCiudad.getSelectedItem().toString();
         double peso = 0;
         if (ciudad.equals("")) {
-            JOptionPane.showMessageDialog(null, "Hay Campos vacios");
+            JOptionPane.showMessageDialog(null, "No deben haber campos vacíos");
             return;
         }
 
         try {
-            peso = Double.parseDouble(jTextField1.getText());
+            peso = Double.parseDouble(txtCapacidadC.getText());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "El campo peso no es valido");
+            JOptionPane.showMessageDialog(null, "El peso ingresado no es válido");
             return;
         }
 
-        Ubicacion ubicacion = null;
+        Coordenadas ubicacion = null;
         
         for (Ciudad c : this.ciudades) {
             if(c.getNombre().equals(ciudad)){
-                ubicacion = c.getUbicacion();
+                ubicacion = c.getCoordenadas();
                 break;
             }
         }
 
-        this.clienteBodega.solicitarEnvioPaquetes(ubicacion, peso);
+        this.BodegaClient.solicitarEnvioPaquetes(ubicacion, peso);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSolicitarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String nombreCiudad = jComboBox1.getSelectedItem().toString();
-        jComboBox2.removeAllItems();
-        this.ciudades = this.clienteRecepcion.obtenerCiudades(nombreCiudad);
+    private void CBDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepartamentoActionPerformed
+        String nombreCiudad = CBDepartamento.getSelectedItem().toString();
+        CBCiudad.removeAllItems();
+        this.ciudades = this.RecepcionClient.obtenerCiudades(nombreCiudad);
         for (Ciudad ciudad : this.ciudades) {
-            jComboBox2.addItem(ciudad.getNombre());
+            CBCiudad.addItem(ciudad.getNombre());
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_CBDepartamentoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> CBCiudad;
+    private javax.swing.JComboBox<String> CBDepartamento;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnSolicitar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelFondo;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JTable tableSolicitud;
+    private javax.swing.JTextField txtCapacidadC;
     // End of variables declaration//GEN-END:variables
 }
