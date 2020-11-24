@@ -20,20 +20,20 @@ public class BodegaImplementacion implements Bodega {
 
     private ArrayList<Paquete> paquetesBodega;
     
-    private TempBodega bufferBodega;
+    private TempBodega tempBodega;
     
     private ArrayList<Camion> camiones;
 
     public BodegaImplementacion() {
         this.paquetesBodega = new ArrayList<>();
         this.camiones = new ArrayList<>();
-        this.bufferBodega = new TempBodega(this);
-        this.bufferBodega.start();
+        this.tempBodega = new TempBodega(this);
+        this.tempBodega.start();
     }
 
     @Override
     public boolean guardarPaquete(Paquete paquete) throws RemoteException {
-        this.bufferBodega.añadirPaquete(paquete);
+        this.tempBodega.añadirPaquete(paquete);
         return true;
     }
 
@@ -45,7 +45,7 @@ public class BodegaImplementacion implements Bodega {
     
     @Override
     public boolean solicitarEnvio(Coordenadas ubicacion, double peso) throws RemoteException {
-        this.bufferBodega.agregarPaquetesEnviar(this.paquetesBodega, ubicacion, peso);
+        this.tempBodega.agregarPaquetesEnviar(this.paquetesBodega, ubicacion, peso);
         return true;
     }
     

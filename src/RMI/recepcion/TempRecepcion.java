@@ -29,24 +29,27 @@ public class TempRecepcion extends Thread {
     }
 
     private void registrarPaquete() {
+        int i;
         while (true) {
             if (paquetes.size() >= 1) {
                 try {
                     System.out.println("Registrando paquete");
 
-                    long inicio = System.currentTimeMillis();
                     Thread.sleep(Globales.TIEMPOREGISTRO);
                     Paquete paquete = paquetes.get(0);
 
-                    long fin = System.currentTimeMillis();
-                    double tiempo = (double) ((fin - inicio) / 1000);
-                    System.out.println("fin: " + tiempo + " segundos");
+                    int tiempo = Globales.TIEMPOREGISTRO;
+                    for(i=0; i<tiempo; i++){
+                        if(i == tiempo-1){
+                            System.out.println("Registro finalizado en: " + tiempo + " segundos");
+                        }
+                    }
 
                     this.paquetes.remove(paquete);
                     
                     this.recepcionImpl.guardarPaqueteBodega(paquete);
                 } catch (InterruptedException ex) {
-                    System.out.println("[Server] (InterruptedException)");
+                    System.out.println("[Server Recepcion] (InterruptedException)");
                 }
             }else{
                 System.getProperties();

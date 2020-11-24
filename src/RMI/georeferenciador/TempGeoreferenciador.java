@@ -32,17 +32,22 @@ public class TempGeoreferenciador extends Thread {
     }
 
     private void georeferenciar() {
+        int i;
         while (true) {
             if (paquetes.size() >= 1) {
                 try {                    
-                    long inicio = System.currentTimeMillis();
+                    System.out.println("Georeferenciando");
                     Thread.sleep(Globales.TIEMPOGEOREFERENCIADOR);
                     Paquete paquete = paquetes.get(0);
                     paquete = this.destinarCiudad(paquete);
-
-                    long fin = System.currentTimeMillis();
-                    double tiempo = (double) ((fin - inicio) / 1000);
-                    System.out.println("fin: " + tiempo + " segundos");
+                    
+                    int tiempo = Globales.TIEMPOGEOREFERENCIADOR;
+                    System.out.println(tiempo);
+                    for(i=0; i<tiempo; i++){
+                        if(i == tiempo-1){
+                            System.out.println("Tiempo de finalización: " + tiempo + " segundos");
+                        }
+                    }
 
                     this.paquetes.remove(paquete);
 

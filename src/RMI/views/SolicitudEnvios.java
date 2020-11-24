@@ -59,7 +59,7 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         this.model = (DefaultTableModel) tableSolicitud.getModel();
         if (this.paquetes != null) {
             for (Paquete paquete : this.paquetes) {
-                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getCiudadEmisor(), paquete.getNombreReceptor(), paquete.getCiudadReceptor(), paquete.getEstado(), paquete.getPeso()});
+                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getCiudadEmisor(), paquete.getNombreReceptor(), paquete.getCiudadReceptor(), paquete.getCoordenadas().getLatitud(), paquete.getCoordenadas().getLongitud(), paquete.getEstado(), paquete.getPeso()});
             }
         }
     }
@@ -86,6 +86,7 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         btnCerrar = new javax.swing.JButton();
         labelLogo = new javax.swing.JLabel();
         labelFondo = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,14 +97,14 @@ public class SolicitudEnvios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Emisor", "Ciudad Emision", "Receptor", "Ciudad Destino", "Estado", "Peso"
+                "Emisor", "Ciudad Emision", "Receptor", "Ciudad Destino", "Latitud", "Longitud", "Estado", "Peso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -115,8 +116,18 @@ public class SolicitudEnvios extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tableSolicitud);
+        if (tableSolicitud.getColumnModel().getColumnCount() > 0) {
+            tableSolicitud.getColumnModel().getColumn(0).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(1).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(2).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(3).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(4).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(5).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(6).setResizable(false);
+            tableSolicitud.getColumnModel().getColumn(7).setResizable(false);
+        }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 712, 282));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 110, 720, 282));
 
         btnSolicitar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         btnSolicitar.setText("Solicitar Envío");
@@ -137,25 +148,25 @@ public class SolicitudEnvios extends javax.swing.JDialog {
                 CBDepartamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(CBDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 169, 31));
+        getContentPane().add(CBDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 180, 169, 31));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Departamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, -1, -1));
 
-        getContentPane().add(CBCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 172, 31));
+        getContentPane().add(CBCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 172, 31));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ciudad:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Capacidad camion:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, -1, -1));
-        getContentPane().add(txtCapacidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 330, 170, 31));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, -1, -1));
+        getContentPane().add(txtCapacidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 170, 31));
 
         btnCerrar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         btnCerrar.setText("Cerrar");
@@ -167,6 +178,11 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 470, 230, 40));
         getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, 70));
         getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 570));
+
+        jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Datos Camión");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,6 +237,7 @@ public class SolicitudEnvios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelFondo;
     private javax.swing.JLabel labelLogo;

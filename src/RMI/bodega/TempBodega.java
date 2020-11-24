@@ -63,40 +63,45 @@ public class TempBodega extends Thread {
         this.estado = true;
     }
 
-    private void procesosBodega() {
+    private void tareasBodega() {
+        int i;
         while (true) {
             if (paquetesAlmacen.size() >= 1) {
                 try {
                     System.out.println("Almacenando en bodega");
-
-                    long inicio = System.currentTimeMillis();
                     Thread.sleep(Globales.TIEMPOALMACENAMIENTO);
                     Paquete paquete = paquetesAlmacen.get(0);
 
-                    long fin = System.currentTimeMillis();
-                    double tiempo = (double) ((fin - inicio) / 1000);
-                    System.out.println("fin: " + tiempo + " segundos");
+                    int tiempo = Globales.TIEMPOALMACENAMIENTO;
+                    System.out.println(tiempo);
+                    for(i=0; i<tiempo; i++){
+                        if(i == tiempo-1){
+                            System.out.println("Almacenamiento finalizado en: " + tiempo + " segundos");
+                        }
+                    }
 
                     this.paquetesAlmacen.remove(paquete);
 
                     this.bodegaImpl.guardarEnBodega(paquete);
                 } catch (InterruptedException ex) {
-                    System.out.println("[Servidor] (InterruptedException) " + ex.getMessage());
+                    System.out.println("[Servidor Bodega] (InterruptedException) " + ex.getMessage());
                 }
             }
             if (paquetesEnvio != null && this.estado) {
                 try {
                     this.estado = false;
                     System.out.println("Preparando envio");
-                    
-                    long inicio = System.currentTimeMillis();
                     Thread.sleep(Globales.TIEMPOPREPARACIONENVIO);
 
                     this.procesarEnvio();
 
-                    long fin = System.currentTimeMillis();
-                    double tiempo = (double) ((fin - inicio) / 1000);
-                    System.out.println("fin: " + tiempo + " segundos");
+                    int tiempo = Globales.TIEMPOPREPARACIONENVIO;
+                    System.out.println(tiempo);
+                    for(i=0; i<tiempo; i++){
+                        if(i == tiempo-1){
+                            System.out.println("Preparación del envio finalizado en: " + tiempo + " segundos");
+                        }
+                    }
 
                     this.paquetesEnvio = null;
                 } catch (InterruptedException ex) {
@@ -110,6 +115,6 @@ public class TempBodega extends Thread {
 
     @Override
     public void run() {
-        procesosBodega();
+        tareasBodega();
     }
 }
