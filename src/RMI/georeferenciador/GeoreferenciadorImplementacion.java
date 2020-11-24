@@ -49,7 +49,7 @@ public class GeoreferenciadorImplementacion implements Georeferenciador {
 
     @Override
     public ArrayList<Ciudad> obtenerCiudades(String nombreDepartamento) throws RemoteException {
-        try {
+        try {            
             return udb.obtenerCiudades(nombreDepartamento);
         } catch (SQLException ex) {
             System.out.println("[Server Georeferenciador] (SQLException1)");

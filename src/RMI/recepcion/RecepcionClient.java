@@ -29,9 +29,8 @@ public class RecepcionClient {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            Registry registry = LocateRegistry.getRegistry(ip, 1710);
-            System.out.println(ip);
-            this.recepcion = (Recepcion) registry.lookup("Recepcion");
+            Registry registry = LocateRegistry.getRegistry(ip, 1710);                        
+            this.recepcion = (Recepcion) registry.lookup("Recepcion");            
         } catch (RemoteException ex) {
             System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
         } catch (NotBoundException ex) {

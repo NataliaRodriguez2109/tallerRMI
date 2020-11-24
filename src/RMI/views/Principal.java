@@ -34,25 +34,15 @@ public class Principal extends javax.swing.JFrame {
         dir.setVisible(true);
     }
 
-    public boolean setdirBodega(String dir) {
+    public boolean setdirCon(String dir) {
         try {
-            bodegaClient = new BodegaClient(dir);            
+            bodegaClient = new BodegaClient(dir);
+            recepcionClient = new RecepcionClient(dir);
         } catch (Exception e) {
             return false;
         }
         return true;
-    }
-
-    public boolean setdirRecepcion(String dir) {
-        try {
-            recepcionClient = new RecepcionClient(dir);
-            //System.out.println(recepcionClient== null);
-            System.out.println(recepcionClient.obtenerDepartamentos().size());
-        } catch (Exception e) {
-            return false;
-        }        
-        return true;
-    }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.

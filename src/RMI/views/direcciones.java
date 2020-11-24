@@ -60,8 +60,7 @@ public class direcciones extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         txtDir = new javax.swing.JTextField();
-        btnBodega = new javax.swing.JButton();
-        btnRecepion = new javax.swing.JButton();
+        btnConectar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblBodega = new javax.swing.JLabel();
         lblRecepcion = new javax.swing.JLabel();
@@ -73,19 +72,11 @@ public class direcciones extends javax.swing.JDialog {
 
         txtDir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        btnBodega.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnBodega.setText("BODEGA");
-        btnBodega.addActionListener(new java.awt.event.ActionListener() {
+        btnConectar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnConectar.setText("RECEPCION");
+        btnConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBodegaActionPerformed(evt);
-            }
-        });
-
-        btnRecepion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnRecepion.setText("RECEPCION");
-        btnRecepion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecepionActionPerformed(evt);
+                btnConectarActionPerformed(evt);
             }
         });
 
@@ -103,11 +94,9 @@ public class direcciones extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(147, 147, 147)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnRecepion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDir, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +121,9 @@ public class direcciones extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRecepcion))
-                .addGap(45, 45, 45)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBodega, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRecepion, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -143,25 +131,15 @@ public class direcciones extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBodegaActionPerformed
+    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         if (validIP(txtDir.getText())) {
-            if (principal.setdirBodega(txtDir.getText())) {
-                lblBodega.setText("BODEGA: ON");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Direccion IP no es valida, revise el formato. \t Ejemplo: '123.123.78.9'", "direccion ip invalida", WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_btnBodegaActionPerformed
-
-    private void btnRecepionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecepionActionPerformed
-        if (validIP(txtDir.getText())) {
-            if (principal.setdirRecepcion(txtDir.getText())) {
+            if (principal.setdirCon(txtDir.getText())) {
                 lblRecepcion.setText("RECEPCION: ON");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Direccion IP no es valida, revise el formato. \t Ejemplo: '123.123.78.9'", "direccion ip invalida", WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_btnRecepionActionPerformed
+    }//GEN-LAST:event_btnConectarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,8 +184,7 @@ public class direcciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBodega;
-    private javax.swing.JButton btnRecepion;
+    private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBodega;

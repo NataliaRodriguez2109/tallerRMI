@@ -54,7 +54,7 @@ public class BodegaServer {
     }
 
     public static void main(String[] args) {
-        BodegaServer bodegaServer = new BodegaServer("127.0.0.1");
+        BodegaServer bodegaServer = new BodegaServer("25.109.206.221");
         bodegaServer.iniciarServicios();
     }
 }

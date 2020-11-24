@@ -22,7 +22,7 @@ public class conexion {
     public Connection getConn(){
         try{
             //Class.forName("org.apache.derby.jdbc.ClientDriver");
-            conn = DriverManager.getConnection("jdbc:derby://25.109.204.202:1527/distribuidos");
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/distribuidos");
             System.out.println("ON");
         }catch(Exception e){
             System.out.println(e.toString());

@@ -55,7 +55,7 @@ public class RecepcionServer {
     }
 
     public static void main(String[] args) throws RemoteException {
-        RecepcionServer recepcionServidor = new RecepcionServer("127.0.0.1");
+        RecepcionServer recepcionServidor = new RecepcionServer("25.109.206.221");
         recepcionServidor.iniciarServicios();
     }
 }

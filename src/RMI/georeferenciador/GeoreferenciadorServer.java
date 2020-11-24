@@ -20,7 +20,7 @@ public class GeoreferenciadorServer {
     private String ip;
 
     public GeoreferenciadorServer(String ip) {
-        this.ip = ip;
+        this.ip = ip;        
     }
 
     public void iniciarServicios() {
