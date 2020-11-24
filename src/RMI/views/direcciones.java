@@ -8,6 +8,7 @@ package RMI.views;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -18,6 +19,8 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
 public class direcciones extends javax.swing.JDialog {
 
     Principal principal;
+    ImageIcon logo = new ImageIcon("src/RMI/images/camion.png");
+    ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
 
     /**
      * Creates new form direcciones
@@ -25,6 +28,8 @@ public class direcciones extends javax.swing.JDialog {
     public direcciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        labelFondo.setIcon(fondo);
+        labelLogo.setIcon(logo);
     }
 
     public void setPrincipal(Principal principal) {
@@ -64,69 +69,44 @@ public class direcciones extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         lblBodega = new javax.swing.JLabel();
         lblRecepcion = new javax.swing.JLabel();
+        labelLogo = new javax.swing.JLabel();
+        labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DIRECCION");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
 
         txtDir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        getContentPane().add(txtDir, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 192, 33));
 
         btnConectar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnConectar.setText("RECEPCION");
+        btnConectar.setText("CONEXIÓN");
         btnConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConectarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, 43));
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSalir.setText("SALIR");
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 132, 43));
 
-        lblBodega.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblBodega.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        lblBodega.setForeground(new java.awt.Color(255, 255, 255));
         lblBodega.setText("BODEGA: OFF");
+        getContentPane().add(lblBodega, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
 
-        lblRecepcion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRecepcion.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        lblRecepcion.setForeground(new java.awt.Color(255, 255, 255));
         lblRecepcion.setText("RECEPCION OFF");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDir, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRecepcion)
-                            .addComponent(lblBodega)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblBodega))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRecepcion))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+        getContentPane().add(lblRecepcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
+        getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 110));
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,6 +115,7 @@ public class direcciones extends javax.swing.JDialog {
         if (validIP(txtDir.getText())) {
             if (principal.setdirCon(txtDir.getText())) {
                 lblRecepcion.setText("RECEPCION: ON");
+                lblBodega.setText("BODEGA: ON");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Direccion IP no es valida, revise el formato. \t Ejemplo: '123.123.78.9'", "direccion ip invalida", WARNING_MESSAGE);
@@ -187,6 +168,8 @@ public class direcciones extends javax.swing.JDialog {
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelFondo;
+    private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel lblBodega;
     private javax.swing.JLabel lblRecepcion;
     private javax.swing.JTextField txtDir;
