@@ -10,7 +10,7 @@ import RMI.recepcion.RecepcionClient;
 import javax.swing.ImageIcon;
 
 /**
- * 
+ *
  *
  * @author nata_
  */
@@ -18,19 +18,40 @@ public class Principal extends javax.swing.JFrame {
 
     ImageIcon logo = new ImageIcon("src/RMI/images/camion.png");
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
-    private RecepcionClient RecepcionClient;
-    private BodegaClient BodegaClient;
-    
+    private RecepcionClient recepcionClient;
+    private BodegaClient bodegaClient;
+
     /**
      * Creates new form Home
      */
     public Principal() {
         initComponents();
-        this.RecepcionClient = new RecepcionClient("127.0.0.1");
-        this.BodegaClient = new BodegaClient("127.0.0.1");
         setLocationRelativeTo(null);
         labelLogo.setIcon(logo);
         labelFondo.setIcon(fondo);
+        direcciones dir = new direcciones(this, true);
+        dir.setPrincipal(this);
+        dir.setVisible(true);
+    }
+
+    public boolean setdirBodega(String dir) {
+        try {
+            bodegaClient = new BodegaClient(dir);            
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean setdirRecepcion(String dir) {
+        try {
+            recepcionClient = new RecepcionClient(dir);
+            //System.out.println(recepcionClient== null);
+            System.out.println(recepcionClient.obtenerDepartamentos().size());
+        } catch (Exception e) {
+            return false;
+        }        
+        return true;
     }
 
     /**
@@ -95,20 +116,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         RegistroEnvio registro = new RegistroEnvio(this, true);
-        registro.setRecepcionClient(this.RecepcionClient);
+        registro.setRecepcionClient(this.recepcionClient);
         registro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSolicitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarActionPerformed
         SolicitudEnvios envio = new SolicitudEnvios(this, true);
-        envio.setBodegaClient(this.BodegaClient);
-        envio.setRecepcionClient(this.RecepcionClient);
+        envio.setBodegaClient(this.bodegaClient);
+        envio.setRecepcionClient(this.recepcionClient);
         envio.setVisible(true);
     }//GEN-LAST:event_btnSolicitarActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         EnviosRealizados envios = new EnviosRealizados(this, true);
-        envios.setBodegaClient(this.BodegaClient);
+        envios.setBodegaClient(this.bodegaClient);
         envios.setVisible(true);
     }//GEN-LAST:event_btnVerificarActionPerformed
 

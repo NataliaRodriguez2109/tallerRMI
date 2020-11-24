@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class RegistroEnvio extends javax.swing.JDialog {
 
-    private RecepcionClient RecepcionClient;
+    private RecepcionClient recepcionClient;
     ImageIcon logo = new ImageIcon("src/RMI/images/camion1.png");
 
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
@@ -33,16 +33,18 @@ public class RegistroEnvio extends javax.swing.JDialog {
     }
 
     public void setRecepcionClient(RecepcionClient clienteRecepcion) {
-        this.RecepcionClient = clienteRecepcion;
-
-        for (Departamento departamento : this.RecepcionClient.obtenerDepartamentos()) {
+        this.recepcionClient = clienteRecepcion;
+        if(recepcionClient.obtenerDepartamentos() == null){
+            System.out.println("hola");
+        }
+        for (Departamento departamento : this.recepcionClient.obtenerDepartamentos()) {
             CBDepEmisor.addItem(departamento.getNombre());
             CBDepReceptor.addItem(departamento.getNombre());
         }
-        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
+        for (Ciudad ciudad : this.recepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
             CBCiuEmisor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
-        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
+        for (Ciudad ciudad : this.recepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
             CBCiuReceptor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
 
@@ -170,14 +172,14 @@ public class RegistroEnvio extends javax.swing.JDialog {
 
     private void CBDepEmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepEmisorActionPerformed
         CBCiuEmisor.removeAllItems();
-        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
-            CBCiuEmisor.addItem(ciudad.getNombre() + "(" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
+        for (Ciudad ciudad : this.recepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
+            CBCiuEmisor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
     }//GEN-LAST:event_CBDepEmisorActionPerformed
 
     private void CBDepReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepReceptorActionPerformed
         CBCiuReceptor.removeAllItems();
-        for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
+        for (Ciudad ciudad : this.recepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
             CBCiuReceptor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
     }//GEN-LAST:event_CBDepReceptorActionPerformed
@@ -210,7 +212,7 @@ public class RegistroEnvio extends javax.swing.JDialog {
         }
 
         Paquete paquete = new Paquete(nombreEmisor, departamentoEmisor, ciudadEmisor, nombreReceptor, departamentoReceptor, ciudadReceptor, pesoPaquete);
-        this.RecepcionClient.registrarPaquete(paquete);
+        this.recepcionClient.registrarPaquete(paquete);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

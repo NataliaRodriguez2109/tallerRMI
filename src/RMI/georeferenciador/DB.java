@@ -74,7 +74,6 @@ public class DB {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             departamentos.add(new Departamento(rs.getInt("id"), rs.getString("nombre")));
-
         }
         return departamentos;
     }

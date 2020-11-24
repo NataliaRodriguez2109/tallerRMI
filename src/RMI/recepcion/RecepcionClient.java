@@ -30,6 +30,7 @@ public class RecepcionClient {
                 System.setSecurityManager(new SecurityManager());
             }
             Registry registry = LocateRegistry.getRegistry(ip, 1710);
+            System.out.println(ip);
             this.recepcion = (Recepcion) registry.lookup("Recepcion");
         } catch (RemoteException ex) {
             System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
@@ -42,16 +43,16 @@ public class RecepcionClient {
         try {
             return recepcion.georeferenciarPaquete(paquete);
         } catch (RemoteException ex) {
-            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException)1: " + ex.getMessage());
         }
         return false;
     }  
 
     public ArrayList<Departamento> obtenerDepartamentos() {
-        try {            
+        try {                        
             return recepcion.obtenerDepartamentos();
         } catch (RemoteException ex) {
-            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException)2: " + ex.getMessage());
         }
         return null;
     }
@@ -60,7 +61,7 @@ public class RecepcionClient {
         try {
             return recepcion.obtenerCiudades(nombreDepartamento);
         } catch (RemoteException ex) {
-            System.out.println("[Client Recepcion] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Recepcion] (RemoteException)3: " + ex.getMessage());
         }
         return null;
     }    

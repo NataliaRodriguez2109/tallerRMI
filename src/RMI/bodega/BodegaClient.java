@@ -29,10 +29,11 @@ public class BodegaClient {
             if (System.getSecurityManager() == null) {
                 System.setSecurityManager(new SecurityManager());
             }
-            Registry registry = LocateRegistry.getRegistry(ip, 1525);
+            Registry registry = LocateRegistry.getRegistry(ip, 1525);            
             this.bodega = (Bodega) registry.lookup("Bodega");
+            System.out.println(ip);
         } catch (RemoteException ex) {
-            System.out.println("[Client Bodega] (RemoteException): " + ex.getMessage());
+            System.out.println("[Client Bodega] (RemoteException)1: " + ex.getMessage());
         } catch (NotBoundException ex) {
             System.out.println("[Client Bodega] (NotBoundException): " + ex.getMessage());
         }
