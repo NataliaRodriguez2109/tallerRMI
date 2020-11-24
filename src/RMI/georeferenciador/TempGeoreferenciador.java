@@ -28,26 +28,13 @@ public class TempGeoreferenciador extends Thread {
     
     public void guardarPaquete(Paquete paquete) {
         this.paquetes.add(paquete);
+        System.out.println(paquete.getCiudadEmisor());
     }
 
     private void georeferenciar() {
         while (true) {
             if (paquetes.size() >= 1) {
-                try {
-                    System.out.println("Georeferenciando");
-                    //System.out.println(paquete1.getCiudadEmisor());
-                    System.out.println(paquete1.getCiudadReceptor());
-                    System.out.println(paquete1.getCoordenadas());
-                    System.out.println(paquete1.getDepartamentoEmisor());
-                    System.out.println(paquete1.getDepartamentoReceptor());
-                    System.out.println(paquete1.getDistanciaDestino());
-                    System.out.println(paquete1.getEstado());
-                    System.out.println(paquete1.getFechaEnvio());
-                    System.out.println(paquete1.getFechaRecibido());
-                    System.out.println(paquete1.getNombreEmisor());
-                    System.out.println(paquete1.getNombreReceptor());
-                    System.out.println(paquete1.getPeso());
-
+                try {                    
                     long inicio = System.currentTimeMillis();
                     Thread.sleep(Globales.TIEMPOGEOREFERENCIADOR);
                     Paquete paquete = paquetes.get(0);

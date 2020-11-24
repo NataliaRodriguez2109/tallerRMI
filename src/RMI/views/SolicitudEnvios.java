@@ -59,7 +59,7 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         this.model = (DefaultTableModel) tableSolicitud.getModel();
         if (this.paquetes != null) {
             for (Paquete paquete : this.paquetes) {
-                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getNombreReceptor(), paquete.getCiudadEmisor(), paquete.getCiudadReceptor(), paquete.getPeso(), paquete.getEstado()});
+                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getNombreReceptor(), paquete.getCiudadEmisor(), paquete.getCiudadReceptor(), paquete.getEstado(), paquete.getPeso()});
             }
         }
     }

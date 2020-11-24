@@ -22,19 +22,19 @@ public class RecepcionImpl implements Recepcion{
 
     private GeorefereciadorClient GeorefereciadorClient;
     private BodegaClient BodegaClient;
-    private TempRecepcion bufferRecepcion;
+    private TempRecepcion tempReception;
     
     public RecepcionImpl(String ip) {
         super();
         this.GeorefereciadorClient = new GeorefereciadorClient(ip);
         this.BodegaClient = new BodegaClient(ip);
-        this.bufferRecepcion = new TempRecepcion(this);
-        this.bufferRecepcion.start();
+        this.tempReception = new TempRecepcion(this);
+        this.tempReception.start();
     }
     
     @Override
     public boolean registrarPaquete(Paquete paquete) throws RemoteException {
-        this.bufferRecepcion.agregarPaquete(paquete);
+        this.tempReception.agregarPaquete(paquete);
         return true;
     }
     @Override

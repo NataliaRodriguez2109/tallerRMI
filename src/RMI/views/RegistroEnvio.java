@@ -21,7 +21,7 @@ public class RegistroEnvio extends javax.swing.JDialog {
 
     private RecepcionClient RecepcionClient;
     ImageIcon logo = new ImageIcon("src/RMI/images/camion1.png");
-    
+
     ImageIcon fondo = new ImageIcon("src/RMI/images/fondo.jpg");
 
     public RegistroEnvio(java.awt.Frame parent, boolean modal) {
@@ -40,12 +40,12 @@ public class RegistroEnvio extends javax.swing.JDialog {
             CBDepReceptor.addItem(departamento.getNombre());
         }
         for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
-            CBCiuEmisor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
+            CBCiuEmisor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
         for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
-            CBCiuReceptor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
+            CBCiuReceptor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
-       
+
     }
 
     /**
@@ -171,14 +171,14 @@ public class RegistroEnvio extends javax.swing.JDialog {
     private void CBDepEmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepEmisorActionPerformed
         CBCiuEmisor.removeAllItems();
         for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepEmisor.getSelectedItem())) {
-            CBCiuEmisor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
+            CBCiuEmisor.addItem(ciudad.getNombre() + "(" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
     }//GEN-LAST:event_CBDepEmisorActionPerformed
 
     private void CBDepReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepReceptorActionPerformed
         CBCiuReceptor.removeAllItems();
         for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
-            CBCiuReceptor.addItem(ciudad.getNombre() +"("+ciudad.getCoordenadas().getLatitud()+", "+ciudad.getCoordenadas().getLongitud()+")");
+            CBCiuReceptor.addItem(ciudad.getNombre() + "(" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
     }//GEN-LAST:event_CBDepReceptorActionPerformed
 
@@ -187,19 +187,15 @@ public class RegistroEnvio extends javax.swing.JDialog {
         String departamentoEmisor = CBDepEmisor.getSelectedItem().toString();
         String ciudadEmisor = CBCiuEmisor.getSelectedItem().toString();
 
+        ciudadEmisor = ciudadEmisor.split("-")[0].replace("(", "");        
         String nombreReceptor = txtReceptor.getText();
         String departamentoReceptor = CBDepReceptor.getSelectedItem().toString();
         String ciudadReceptor = CBCiuReceptor.getSelectedItem().toString();
+        ciudadReceptor = ciudadReceptor.split("-")[0].replace("(", "");
         
-        JOptionPane.showMessageDialog(null, nombreEmisor);
-        JOptionPane.showMessageDialog(null, departamentoEmisor);
-        JOptionPane.showMessageDialog(null, ciudadEmisor);
-        JOptionPane.showMessageDialog(null, nombreReceptor);
-        JOptionPane.showMessageDialog(null, departamentoReceptor);
-        JOptionPane.showMessageDialog(null, ciudadReceptor);
-        
-        float pesoPaquete = 0;
-
+        System.out.println(ciudadEmisor);
+        System.out.println(ciudadReceptor);
+        float pesoPaquete = 0;                
         if (nombreEmisor.equals("") || departamentoEmisor.equals("") || ciudadEmisor.equals("")
                 || nombreReceptor.equals("") || departamentoReceptor.equals("") || ciudadReceptor.equals("")) {
             JOptionPane.showMessageDialog(null, "No deben haber campos vácios");
@@ -219,11 +215,11 @@ public class RegistroEnvio extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void CBCiuReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCiuReceptorActionPerformed
-       
+
     }//GEN-LAST:event_CBCiuReceptorActionPerformed
 
     private void CBCiuEmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBCiuEmisorActionPerformed
-        
+
     }//GEN-LAST:event_CBCiuEmisorActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed

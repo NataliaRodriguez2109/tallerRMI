@@ -63,8 +63,7 @@ public class DB {
             }
             if (!bandera) {
                 ciudades.add(city);
-            }
-            System.out.println(rs.getString("ciudad"));
+            }            
         }
         return ciudades;
     }
