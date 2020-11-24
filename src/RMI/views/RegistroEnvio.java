@@ -178,7 +178,7 @@ public class RegistroEnvio extends javax.swing.JDialog {
     private void CBDepReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDepReceptorActionPerformed
         CBCiuReceptor.removeAllItems();
         for (Ciudad ciudad : this.RecepcionClient.obtenerCiudades((String) CBDepReceptor.getSelectedItem())) {
-            CBCiuReceptor.addItem(ciudad.getNombre() + "(" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
+            CBCiuReceptor.addItem(ciudad.getNombre() + "- (" + ciudad.getCoordenadas().getLatitud() + ", " + ciudad.getCoordenadas().getLongitud() + ")");
         }
     }//GEN-LAST:event_CBDepReceptorActionPerformed
 

@@ -18,13 +18,13 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public class RecepcionImpl implements Recepcion{
+public class RecepcionImplementacion implements Recepcion{
 
     private GeorefereciadorClient GeorefereciadorClient;
     private BodegaClient BodegaClient;
     private TempRecepcion tempReception;
     
-    public RecepcionImpl(String ip) {
+    public RecepcionImplementacion(String ip) {
         super();
         this.GeorefereciadorClient = new GeorefereciadorClient(ip);
         this.BodegaClient = new BodegaClient(ip);

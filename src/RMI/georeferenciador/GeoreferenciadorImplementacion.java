@@ -18,13 +18,13 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public class GeoreferenciadorImpl implements Georeferenciador {
+public class GeoreferenciadorImplementacion implements Georeferenciador {
 
     private TempGeoreferenciador tempGeoreferenciador;
     private Recepcion recepcion;    
     private DB udb;
     
-    public GeoreferenciadorImpl() {
+    public GeoreferenciadorImplementacion() {
         super();
         udb = new DB();
         udb.connect();

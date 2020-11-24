@@ -17,14 +17,14 @@ import java.util.Collections;
  */
 public class TempBodega extends Thread {
 
-    private BodegaImpl bodegaImpl;
+    private BodegaImplementacion bodegaImpl;
     private Coordenadas ubicacion;
     private boolean estado;
     private ArrayList<Paquete> paquetesAlmacen;
     private double pesoP;
     private ArrayList<Paquete> paquetesEnvio;
 
-    public TempBodega(BodegaImpl bodegaImpl) {
+    public TempBodega(BodegaImplementacion bodegaImpl) {
         this.bodegaImpl = bodegaImpl;
         this.paquetesAlmacen = new ArrayList<>();
         this.estado = true;

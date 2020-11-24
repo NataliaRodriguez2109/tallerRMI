@@ -36,7 +36,7 @@ public class BodegaServer {
         
         try{
             System.out.println("[Server Bodega] Instanciado el objeto que va a ser accedido remotamente.");
-            Bodega bodega = new BodegaImpl();
+            Bodega bodega = new BodegaImplementacion();
             
             System.out.println("[Server Bodega] Creando el 'stub' del objeto que va a ser accedido remotamente.");
             Bodega stub = (Bodega) UnicastRemoteObject.exportObject(bodega,0);

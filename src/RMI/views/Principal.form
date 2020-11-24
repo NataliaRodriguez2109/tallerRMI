@@ -62,7 +62,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Rounded MT Bold" size="11" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Verificar envio de paquetes"/>
+        <Property name="text" type="java.lang.String" value="Paquetes enviados"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerificarActionPerformed"/>

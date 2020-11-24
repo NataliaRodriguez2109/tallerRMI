@@ -15,11 +15,11 @@ import java.util.ArrayList;
  */
 public class TempRecepcion extends Thread {
 
-    private RecepcionImpl recepcionImpl;
+    private RecepcionImplementacion recepcionImpl;
     private ArrayList<Paquete> paquetes;
     
 
-    public TempRecepcion(RecepcionImpl recepcionImpl) {
+    public TempRecepcion(RecepcionImplementacion recepcionImpl) {
         this.recepcionImpl = recepcionImpl;
         this.paquetes = new ArrayList<>();
     }

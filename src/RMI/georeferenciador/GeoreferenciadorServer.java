@@ -36,7 +36,7 @@ public class GeoreferenciadorServer {
         
         try{
             System.out.println("[Server Georeferenciador] Instanciado el objeto que va a ser accedido remotamente.");
-            Georeferenciador georeferenciador = new GeoreferenciadorImpl();
+            Georeferenciador georeferenciador = new GeoreferenciadorImplementacion();
             
             System.out.println("[Server Georeferenciador] Creando el 'stub' del objeto que va a ser accedido remotamente.");
             Georeferenciador stub = (Georeferenciador) UnicastRemoteObject.exportObject(georeferenciador,0);

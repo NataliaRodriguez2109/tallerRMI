@@ -59,7 +59,7 @@ public class SolicitudEnvios extends javax.swing.JDialog {
         this.model = (DefaultTableModel) tableSolicitud.getModel();
         if (this.paquetes != null) {
             for (Paquete paquete : this.paquetes) {
-                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getNombreReceptor(), paquete.getCiudadEmisor(), paquete.getCiudadReceptor(), paquete.getEstado(), paquete.getPeso()});
+                model.addRow(new Object[]{paquete.getNombreEmisor(), paquete.getCiudadEmisor(), paquete.getNombreReceptor(), paquete.getCiudadReceptor(), paquete.getEstado(), paquete.getPeso()});
             }
         }
     }
@@ -125,37 +125,37 @@ public class SolicitudEnvios extends javax.swing.JDialog {
                 btnSolicitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSolicitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 570, 221, 40));
+        getContentPane().add(btnSolicitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, 221, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SOLICITUD DE ENVÍO DE PAQUETES");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         CBDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBDepartamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(CBDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 169, 31));
+        getContentPane().add(CBDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 169, 31));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Departamento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, -1));
 
-        getContentPane().add(CBCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 172, 31));
+        getContentPane().add(CBCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 172, 31));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ciudad:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Capacidad camion:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, -1, -1));
-        getContentPane().add(txtCapacidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 31));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, -1, -1));
+        getContentPane().add(txtCapacidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 330, 170, 31));
 
         btnCerrar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         btnCerrar.setText("Cerrar");
@@ -164,9 +164,9 @@ public class SolicitudEnvios extends javax.swing.JDialog {
                 btnCerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, 230, 40));
+        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 470, 230, 40));
         getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, 70));
-        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 650));
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

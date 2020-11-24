@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author nata_
  */
-public class BodegaImpl implements Bodega {
+public class BodegaImplementacion implements Bodega {
 
     private ArrayList<Paquete> paquetesBodega;
     
@@ -24,7 +24,7 @@ public class BodegaImpl implements Bodega {
     
     private ArrayList<Camion> camiones;
 
-    public BodegaImpl() {
+    public BodegaImplementacion() {
         this.paquetesBodega = new ArrayList<>();
         this.camiones = new ArrayList<>();
         this.bufferBodega = new TempBodega(this);

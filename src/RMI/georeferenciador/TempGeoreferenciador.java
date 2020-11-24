@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class TempGeoreferenciador extends Thread {
 
     private ArrayList<Paquete> paquetes;
-    private GeoreferenciadorImpl georeferenciadorImpl;
+    private GeoreferenciadorImplementacion georeferenciadorImpl;
     private Paquete paquete1;
     private Ciudad ciudad1;
 
-    public TempGeoreferenciador(GeoreferenciadorImpl georeferenciadorImpl) {
+    public TempGeoreferenciador(GeoreferenciadorImplementacion georeferenciadorImpl) {
         this.georeferenciadorImpl = georeferenciadorImpl;
         this.paquetes = new ArrayList<>();
     }

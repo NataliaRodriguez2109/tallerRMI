@@ -37,7 +37,7 @@ public class RecepcionServer {
 
         try {
             System.out.println("[Server Recepcion] Instanciado el objeto que va a ser accedido remotamente.");
-            Recepcion Recepcion = new RecepcionImpl(this.ip);
+            Recepcion Recepcion = new RecepcionImplementacion(this.ip);
 
             System.out.println("[Server Recepcion] Creando el 'stub' del objeto que va a ser accedido remotamente.");
             Recepcion stub = (Recepcion) UnicastRemoteObject.exportObject(Recepcion, 0);

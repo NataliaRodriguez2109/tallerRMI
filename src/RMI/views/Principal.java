@@ -71,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(btnSolicitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 190, 53));
 
         btnVerificar.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        btnVerificar.setText("Verificar envio de paquetes");
+        btnVerificar.setText("Paquetes enviados");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarActionPerformed(evt);

@@ -43,10 +43,10 @@ public class EnviosRealizados extends javax.swing.JDialog {
         this.model = (DefaultTableModel) jTable1.getModel();
         if (this.camiones != null) {
             for (Camion camion : this.camiones) {
-                for(Paquete paquete : camion.getPaquetes()){
-                    model.addRow(new Object[]{camion.getId(), paquete.getFechaEnvio(), paquete.getNombreEmisor(), 
-                        paquete.getNombreReceptor(), paquete.getCiudadEmisor(), paquete.getCiudadReceptor(), 
-                        camion.getCapacidad(), paquete.getPeso(), paquete.getEstado()});
+                for(Paquete paquete : camion.getPaquetes()){                    
+                    model.addRow(new Object[]{camion.getId(), camion.getCapacidad(), paquete.getNombreReceptor(), 
+                        paquete.getCiudadReceptor(), paquete.getNombreEmisor(), paquete.getCiudadEmisor(), 
+                        paquete.getFechaEnvio(), paquete.getEstado(), paquete.getPeso()});
                 }
             }
         }
@@ -77,7 +77,7 @@ public class EnviosRealizados extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Camion id", "Capacidad camion", "Receptor", "Ciudad Receptor", "Emisor", "Ciudad emisor", "Fecha envio", "Estado", "Peso"
+                "Camion", "Capacidad camion", "Receptor", "Ciudad Receptor", "Emisor", "Ciudad emisor", "Fecha envio", "Estado", "Peso"
             }
         ) {
             Class[] types = new Class [] {
@@ -100,6 +100,7 @@ public class EnviosRealizados extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
@@ -107,7 +108,7 @@ public class EnviosRealizados extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 69, 850, 338));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 69, 1000, 338));
 
         jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jButton1.setText("Cerrar");
@@ -116,14 +117,14 @@ public class EnviosRealizados extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 221, 44));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 221, 44));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ENVIOS REALIZADOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
         getContentPane().add(labelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 190, 70));
-        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 510));
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
