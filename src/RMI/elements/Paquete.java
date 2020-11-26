@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author nata_
  */
-public class Paquete implements Serializable, Comparable<Paquete> {
+public class Paquete implements Serializable{
 
     private String nombreEmisor;
     private String departamentoEmisor;
@@ -133,8 +133,4 @@ public class Paquete implements Serializable, Comparable<Paquete> {
         this.distanciaDestino = distanciaDestino;
     }
 
-    @Override
-    public int compareTo(Paquete paquete) {
-        return (int) (this.distanciaDestino - paquete.getDistanciaDestino());
-    }
 }

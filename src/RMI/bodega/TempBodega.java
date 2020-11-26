@@ -47,7 +47,7 @@ public class TempBodega extends Thread {
                     ubicacion.getLatitud(), paquete.getCoordenadas().getLongitud(), ubicacion.getLongitud()));
         }
         
-        Collections.sort(paquetesEnvio);
+        
         double pesoTotal = 0;
         for (Paquete paquete : paquetesEnvio) {
             if (pesoTotal + paquete.getPeso() <= pesoP) {

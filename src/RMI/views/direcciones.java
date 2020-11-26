@@ -94,6 +94,11 @@ public class direcciones extends javax.swing.JDialog {
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 132, 43));
 
         lblBodega.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
@@ -121,6 +126,10 @@ public class direcciones extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Direccion IP no es valida, revise el formato. \t Ejemplo: '123.123.78.9'", "direccion ip invalida", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnConectarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
